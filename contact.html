@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Show 3 images per row */
+            gap: 20px;
+            justify-items: center;
+            padding: 20px;
+        }
+        .gallery-item {
+            text-align: center;
+        }
+        .gallery img {
+            width: 100%;
+            max-width: 400px; /* Make images bigger */
+            height: 300px; /* Ensure consistent image size */
+            object-fit: cover; /* Maintain aspect ratio */
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-radius: 15px; /* Add rounded borders */
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+        .description {
+            color: white; /* Change text color to white */
+            padding: 10px 0;
+            font-size: 16px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            margin: 15% auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .modal-content img {
+            width: 100%;
+        }
+        .caption {
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #58838a;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        nav {
+            background-color: #58838a;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            height: 5vh; /* Occupy 8% of the screen height */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-left {
+            margin-left: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav ul {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            padding-right: 1%;
+            list-style-type: none;
+        }
+        nav li {
+            text-transform: uppercase;
+            cursor: pointer;
+            color: #ebebeb;
+            margin-left: 20px;
+        }
+        nav li:hover {
+                animation: spring 50ms ease-out;
+                font-weight: bold;
+            }
+        nav li:active {
+            transform: translateY(4px);
+        }
+        @keyframes spring {
+            15% {
+                transform-origin: center center;
+                transform: scale(1.2, 1.1);
+            }
+            40% {
+                transform-origin: center center;
+                transform: scale(0.95, 0.95);
+            }
+            75% {
+                transform-origin: center center;
+                transform: scale(1.05, 1);
+            }
+            100% {
+                transform-origin: center center;
+                transform: scale(1, 1);
+            }
+        }
+        .shameless-plug {
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+            padding: 8px 20px;
+            color: #ccc;
+            text-decoration: none;
+        }
+        a {
+            color: white;
+            text-decoration: none; /* no underline */
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        footer {
+            background-color: #58838a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .about-us, form {
+            max-width: 50%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .about-us {
+            margin-bottom: 20px;
+            margin-top:3%;
+        }
+        form div {
+            margin: 15px;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #58838a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #3b4a50;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">Itherius es Arte</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>|</li>
+            <li><a href="gallery.html">Photo Gallery</a></li>
+            <li>|</li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="about-us">
+            <h1>About Us</h1>
+            <p>Welcome to Itherius, where art meets passion. We are dedicated to showcasing the finest artworks and connecting artists with art enthusiasts. Our mission is to inspire and be inspired by the beauty of art in all its forms.</p>
+        </div>
+        <form id="contact-form">
+            <h1>Contact Us</h1>
+            <div>
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" name="full-name" required>
+            </div>
+            <div>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="telephone">Telephone</label>
+                <input type="tel" id="telephone" name="telephone" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2023 Itherius. All rights reserved.</p>
+    </footer>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const telephone = document.getElementById('telephone').value;
+            const mailtoLink = 'mailto:itheriusesarte@gmail.com?subject=Contact%20Form%20Submission&body=Full%20Name:%20${encodeURIComponent(fullName)}%0AEmail:%20${encodeURIComponent(email)}%0ATelephone:%20${encodeURIComponent(telephone)}';
+            window.location.href = mailtoLink;
+        });
+    </script>
+</body>
+</html>

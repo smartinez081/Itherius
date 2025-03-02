@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Show 3 images per row */
+            gap: 20px;
+            justify-items: center;
+            padding: 8%;
+            padding-top: 3%;
+        }
+        .gallery-item {
+            text-align: center;
+        }
+        .gallery img {
+            width: 100%;
+            max-width: 400px; /* Make images bigger */
+            height: 300px; /* Ensure consistent image size */
+            object-fit: cover; /* Maintain aspect ratio */
+            cursor: pointer;
+            transition: transform 0.2s;
+            border-radius: 5px; /* Add rounded borders */
+            border: 2px solid #fff; /* Add a beautiful border */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+        .gallery img:hover {
+            transform: scale(1.1);
+            border-color: #f1c40f; /* Change border color on hover */
+        }
+        .description {
+            color: white; /* Change text color to white */
+            padding: 10px 0;
+            font-size: 16px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+        .modal-content {
+            margin: 2% auto;
+            display: block;
+            width: 80%;
+            max-width: 90%;
+        }
+        .modal-content img {
+            width: 100%;
+        }
+        .caption {
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #58838a;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        nav {
+            background-color: #58838a;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            height: 5vh; /* Occupy 8% of the screen height */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-left {
+            margin-left: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav ul {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+            margin: 0;
+            padding-right: 1%;
+            list-style-type: none;
+        }
+        nav li {
+            text-transform: uppercase;
+            cursor: pointer;
+            color: #ebebeb;
+            margin-left: 20px;
+        }
+        nav li a:hover {
+                animation: spring 50ms ease-out;
+                font-weight: bold;
+            }
+        nav li:active {
+            transform: translateY(4px);
+        }
+        @keyframes spring {
+            15% {
+                transform-origin: center center;
+                transform: scale(1.2, 1.1);
+            }
+            40% {
+                transform-origin: center center;
+                transform: scale(0.95, 0.95);
+            }
+            75% {
+                transform-origin: center center;
+                transform: scale(1.05, 1);
+            }
+            100% {
+                transform-origin: center center;
+                transform: scale(1, 1);
+            }
+        }
+        .shameless-plug {
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+            padding: 8px 20px;
+            color: #ccc;
+            text-decoration: none;
+        }
+        a {
+            color: white;
+            text-decoration: none; /* no underline */
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        footer {
+            background-color: #58838a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        form {
+            max-width: 50%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form div {
+            margin: 15px;
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            background-color: #58838a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #3b4a50;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">Itherius es Arte</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>|</li>
+            <li><a href="gallery.html">Photo Gallery</a></li>
+            <li>|</li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modal-img" src="">
+            <div class="caption" id="modal-caption"></div>
+        </div>
+    </div>
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="./images/1.jpeg" alt="Image 1" data-caption="La tierra sobre montanas">
+            <div class="description">La tierra sobre montanas</div>
+        </div>
+        <div class="gallery-item">
+            <img src="./images/2.jpeg" alt="Image 2" data-caption="This is image 2">
+            <div class="description">This is image 2</div>
+        </div>
+        <div class="gallery-item">
+            <img src="./images/3.jpeg" alt="Image 3" data-caption="This is image 3">
+            <div class="description">This is image 3</div>
+        </div>
+        <div class="gallery-item">
+            <img src="./images/4.jpeg" alt="Image 4" data-caption="This is image 4">
+            <div class="description">This is image 4</div>
+        </div>
+        <div class="gallery-item">
+            <img src="./images/5.jpeg" alt="Image 4" data-caption="This is image 4">
+            <div class="description">This is image 4</div>
+        </div>
+        <!-- Add more gallery items as needed -->
+    </div>
+
+    
+
+    <script>
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("modal-img");
+        const captionText = document.getElementById("modal-caption");
+        const closeBtn = document.getElementsByClassName("close")[0];
+        let currentIndex = -1;
+        const images = document.querySelectorAll('.gallery img');
+
+        function showModal(index) {
+            currentIndex = index;
+            modal.style.display = "block";
+            modalImg.src = images[index].src;
+            captionText.innerHTML = images[index].getAttribute("data-caption");
+        }
+
+        images.forEach((img, index) => {
+            img.onclick = function() {
+                showModal(index);
+            }
+        });
+
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        window.onkeydown = function(event) {
+            if (modal.style.display === "block") {
+                if (event.key === "ArrowRight") {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    showModal(currentIndex);
+                } else if (event.key === "ArrowLeft") {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    showModal(currentIndex);
+                } else if (event.key === "Escape") {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+<footer>
+    <p>&copy; 2023 Itherius. All rights reserved.</p>
+</footer>
+</html>
