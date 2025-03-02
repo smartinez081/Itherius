@@ -236,7 +236,8 @@
             const fullName = document.getElementById('full-name').value;
             const email = document.getElementById('email').value;
             const telephone = document.getElementById('telephone').value;
-            const mailtoLink = 'mailto:itheriusesarte@gmail.com?subject=Contact%20Form%20Submission&body=Full%20Name:%20${encodeURIComponent(fullName)}%0AEmail:%20${encodeURIComponent(email)}%0ATelephone:%20${encodeURIComponent(telephone)}';
+            const mailtoLink = `mailto:itheriusesarte@gmail.com?subject=Contact%20Form%20Submission&body=Full%20Name:%20${encodeURIComponent(fullName)}%0AEmail:%20${encodeURIComponent(email)}%0ATelephone:%20${encodeURIComponent(telephone)}`;
+            
             window.location.href = mailtoLink;
         });
     </script>
